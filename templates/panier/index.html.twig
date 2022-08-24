@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Votre panier !
+{% endblock %}
+
+{% block body %}
+	<section class="container bg-light p-4 mt-3 mb-3">
+		<h1>
+			Votre panier
+		</h1>
+	</section>
+
+	<table class="table container">
+		<thead>
+			<tr>
+				<th>Produit</th>
+				<th>Prix</th>
+				<th>Quantité</th>
+				<th>Total</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for elem in dataPanier %}
+				<tr>
+					<td>{{elem.produit.name}}</td>
+					<td>{{elem.produit.price/100}}€</td>
+					<td>{{elem.quantite}}</td>
+					<td>{{(elem.produit.price * elem.quantite)/100}}€</td>
+					<td>
+						{% if elem.quantite < elem.produit.stock %}
+							<a href="{{path("panier_addById",{id: elem.produit.id})}}" class="btn btn-success">
+								<i class="bi bi-cart-plus"></i>
+							</a>
+						{% else %}
+							<a href="{{path("panier_index")}}" class="btn btn-secondary">
+								<i class="bi bi-cart-plus"></i>
+							</a>
+						{% endif %}
+						<a href="{{path("panier_removeById",{id: elem.produit.id})}}" class="btn btn-warning">
+							<i class="bi bi-cart-dash"></i>
+						</a>
+						<a href="{{path("panier_dellById",{id: elem.produit.id})}}" class="btn btn-danger">
+							<i class="bi bi-cart-x"></i>
+						</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5" class="text-center">
+						Votre panier est vide
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colsoan="3">Total</td>
+				<td>{{total/100}}€</td>
+				<td></td>
+				<td></td>
+				<td>
+					<a href="{{path("panier_dell")}}" class="btn btn-danger">
+						<i class="bi bi-cart-x"></i>
+					</a>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+	<div class="container">
+		{% if app.user %}
+			<a href="{{path("panier_buy")}}" class="btn btn-primary px-4">Payer</a>
+		{% else %}
+			<a href="{{path("app_login")}}" class="btn btn-primary px-4">Se connecter</a>
+		{% endif %}
+	</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+<h1>Votre reçu</h1>
+<p>
+	Bonjour
+	{{app.user.firstname}}
+</p>
+<p>Vous trouverez si dessous le recapitulatif de votre commande passé le
+	{{date['weekday']}}
+	{{date['mday']}}
+	{{date['month']}}
+	à
+	{{date['hours']}}
+	heure
+	{{date['minutes']}}</p>
+<p>Numéro de commande :
+	{{ref}}
+</p>
+<p>Les produits :</p>
+
+{% for key, item in recap %}
+	<p>
+		Nom :
+		{{key}}, quantité :
+		{{item['quantite']}}, prix :
+		{{item['prix']/100}}€
+	</p>
+{% endfor %}
+<p>Le prix total est de :
+	{{total/100}}€</p>
+<p>
+	Merci de votre achat, à bientôt</p>

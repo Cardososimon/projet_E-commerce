@@ -1,0 +1,24 @@
+.ordinateur {
+    background-image: url('/images/categorie/ordinateur.jpg');
+    background-position: center;
+}
+
+.ecran {
+    background-image: url('/images/categorie/ecran.jpg');
+    background-position: center;
+}
+
+.souris {
+    background-image: url('/images/categorie/souris.jpg');
+    background-position: center;
+}
+
+.clavier {
+    background-image: url('/images/categorie/clavier.jpg');
+    background-position: center;
+}
+
+.composant {
+    background-image: url('/images/categorie/composant.jpg');
+    background-position: center;
+}

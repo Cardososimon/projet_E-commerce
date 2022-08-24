@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+{% block title %}Liste des produits de la categorie
+	{{categories.name}}
+{% endblock %}
+{% block body %}
+	<main class="container">
+		<section class="row">
+			<div class="col-12">
+				<h1>Liste des produits de la categorie
+					{{categories.name}}</h1>
+			</div>
+			{% for produit in produits %}
+				<div class="col-3 mb-3">
+					<article class="card h-100">
+						<div class=" card-img-top">
+							<img class="img-fluid" src=" {{ vich_uploader_asset(produit.images[0],'imageFile') }} " alt=" {{ produit.images[0].name }} ">
+						</div>
+						<div class="h-100 card-body">
+							<h2 class="card-title text-center">{{produit.name}}</h2>
+							<p class="card-text">{{produit.description}}</p>
+
+						</div>
+						<div class="card-footer">
+							<a href="{{path('product_details',{slug: produit.slug})}}" class="btn btn-primary w-100">Voir les details</a>
+						</div>
+					</article>
+				</div>
+			</a>
+
+		{% endfor %}
+		{% if is_granted('ROLE_ADMIN') %}
+			<div class="col-3 mb-3">
+				<article class="card h-100">
+					<div class=" card-img-top">
+						<img class="img-fluid" src="{{ asset('/images/workElement/work.jpg') }} " alt="icon ajouter un élement">
+					</div>
+					<div class="card-body">
+						<h2 class="card-title">Ajouter un produit</h2>
+						<p class="card-text">Un produit qui aura pour type :
+							{{categories.name}}</p>
+					</div>
+					<div class="card-footer">
+						<a href="{{path('product_add',{id: categories.id})}}" " class=" btn btn-primary w-100 ">Ajouter</a>
+					</div>
+				</article>
+			</div>
+		{% endif %}
+	</section>
+</main>{% endblock %}
